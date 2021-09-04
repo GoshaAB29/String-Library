@@ -1,6 +1,8 @@
 #include <stdio.h>
-#include  <ctype.h>
+#include <ctype.h>
 #include <string.h>
+#include <stdlib.h>
+#include <iostream>
 
 int puts_onegin (const char *s)
 {
@@ -30,10 +32,9 @@ size_t strlen_onegin (const char *s)
 {
     int length = 0;
 
-    while (*s != '\0') {
-
-        length++;
+    while ((*s != '\0') && (*s != '\n')) {
         s++;
+        length++;
     }
 
     return length;
@@ -109,40 +110,81 @@ char *strncat_onegin (char *dst, const char *src, size_t len)
     return dst;
 }
 
-char *fgets_onegin (char *s, int size, FILE *stream)  //надо будет доделать...
+char *fgets_onegin (char *s, int size, FILE *stream)
 {
-    size--;
-    for (size; size > 0; size--) {
+    while (size != 1) {
         char smb = getc (stream);
-        if ((smb == '\n') || (smb == EOF)) {
+
+        if (smb == '\n') {
+            *s = '\n';
+            s++;
             *s = '\0';
-            break;
+            return s;
         }
+
+        if  (smb == EOF)
+            return NULL;
 
         *s = smb;
         ++s;
-
+        --size;
     }
-    if (*s != '\0')
+
+    *s = '\0';
+
+    return s;
+}
+
+char *strdup_onegin (const char *s)
+{
+    if (s == nullptr)
         return NULL;
-                 //
-    return s;    //
+
+    char *dup = (char*) malloc ((strlen_onegin (s) + 1) * sizeof(char));
+
+    if (dup == nullptr)
+        return NULL;
+
+    strcpy_onegin (dup, s);
+
+    return dup;
+}
+
+int getline_onegin (char *line, int max)
+{
+    if (fgets_onegin (line, max, stdin) == NULL)
+        return 0;
+    else
+        return strlen_onegin (line);
 }
 
 int main ()
 {
-    char str2[100] = "meat and dough";
-    char str[100] = "fridge";
+   // char str2[100] = "meat and dough";
+   // char str[100] = "fridge";
 
-    //printf ("%p\n", strchr_onegin (str, 's'));
-    //printf ("%d\n", strlen_onegin (str));
+   // printf ("%p\n", strchr_onegin (str, 's'));
+   // printf ("%d\n", strlen_onegin (str));
 
-    //strncpy_onegin (str2, str, 9);
-    //puts_onegin (str2);
-    char s[100] = "";
-    fgets_onegin (s, 5, stdin);
-    puts(s);
-    //puts_onegin (str);
-    //puts_onegin (str2);
+   // strncpy_onegin (str2, str, 9);
+   // puts_onegin (str2);
+   // char s[100] = " ";
+   // char* ukaz = (char*)s[100];
+   // printf("%d",fgets_onegin (s, 2, stdin));
+   // puts(s);
+   //char *a = strdup_onegin (s);
+   // puts (a);
+   // free(a);
+   // puts ("End!");
+   // puts_onegin (str);
+   // puts_onegin (str2);
+   // size_t n = 3;
+   // puts (s);
+   // char line[15] = "FRKT";
+   // int linecap = 10;
+   // int linelen = 0;
+   // linelen = getline_onegin ((char*)&line, linecap);
+   // printf ("%d\n", linelen);
+   // puts (line);
     return 0;
 }
