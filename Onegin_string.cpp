@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <ctype.h>
-#include <string.h>
 #include <stdlib.h>
-#include <iostream>
+//#include <string.h>
+//#include <iostream>
 
 int puts_onegin (const char *s)
 {
@@ -54,7 +54,7 @@ char *strncpy_onegin (char *dst, const char *src, size_t len)
 {
     int num_copied = 0;
 
-    while ((*src) && (len > num_copied)) {
+    while ((*src) && (num_copied < len)) {
 
         ++num_copied;
 
@@ -64,7 +64,7 @@ char *strncpy_onegin (char *dst, const char *src, size_t len)
         ++src;
     }
 
-    if (len > num_copied) {
+    if (num_copied < len) {
         while (*dst) {
 
             *dst = '\0';
@@ -78,7 +78,7 @@ char *strncpy_onegin (char *dst, const char *src, size_t len)
 char *strcat_onegin (char *dst, const char *src )
 {
     while (*dst) {
-    ++dst;
+        ++dst;
     }
 
     while (*src) {
