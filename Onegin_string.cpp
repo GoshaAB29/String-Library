@@ -1,8 +1,4 @@
-#include <stdio.h>
-#include <ctype.h>
-#include <stdlib.h>
-//#include <string.h>
-//#include <iostream>
+#include "Onegin_string.h"
 
 int puts_onegin (const char *s)
 {
@@ -156,35 +152,4 @@ int getline_onegin (char *line, int max)
         return 0;
     else
         return strlen_onegin (line);
-}
-
-int main ()
-{
-   // char str2[100] = "meat and dough";
-   // char str[100] = "fridge";
-
-   // printf ("%p\n", strchr_onegin (str, 's'));
-   // printf ("%d\n", strlen_onegin (str));
-
-   // strncpy_onegin (str2, str, 9);
-   // puts_onegin (str2);
-   // char s[100] = " ";
-   // char* ukaz = (char*)s[100];
-   // printf("%d",fgets_onegin (s, 2, stdin));
-   // puts(s);
-   //char *a = strdup_onegin (s);
-   // puts (a);
-   // free(a);
-   // puts ("End!");
-   // puts_onegin (str);
-   // puts_onegin (str2);
-   // size_t n = 3;
-   // puts (s);
-   // char line[15] = "FRKT";
-   // int linecap = 10;
-   // int linelen = 0;
-   // linelen = getline_onegin ((char*)&line, linecap);
-   // printf ("%d\n", linelen);
-   // puts (line);
-    return 0;
 }
